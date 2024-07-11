@@ -1,0 +1,130 @@
+﻿@model IEnumerable<AppHotelBeachSA.Models.Reservacion>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista Reservaciones</h1>
+
+<div class="table-responsive">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.idReservacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorreoElectronico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaReserva)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CantidadPersonas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CantidadNoches)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FormaPago)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaqueteEscogido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descuento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Impuesto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MontoTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecioColones)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Prima)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PagoMensual)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idReservacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantidadPersonas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantidadNoches)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormaPago)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaqueteEscogido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descuento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Impuesto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MontoTotal)
+                    </td>
+                    <td>
+                        @{
+                            double precioColones = item.MontoTotal * AppHotelBeachSA.Controllers.ReservacionController.varTipoCambio.venta;
+                        }
+                        @precioColones.ToString("F")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prima)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PagoMensual)
+                    </td>
+                    <td>
+
+
+                        @Html.ActionLink("Eliminar", "Eliminar", new {  id=item.idReservacion },new {@class="btn btn-primary"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

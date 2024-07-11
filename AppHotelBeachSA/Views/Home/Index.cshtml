@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <title>Carousel de Bootstrap</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        .carousel {
+            margin-bottom: 60px; /* Ajusta el margen inferior según el tamaño de tu footer */
+        }
+
+        .body{
+            margin-bottom: 60px; /* Ajusta el margen inferior según el tamaño de tu footer */
+        }
+
+        .carousel-container {
+            width: 100%;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.7); /* Color de fondo con opacidad */
+            color: #fff; /* Color del texto */
+            padding: 10px; /* Espaciado interno */
+        }
+
+        .container {
+            margin-bottom: 60px; /* Ajusta el margen inferior del contenedor principal para evitar la superposición con el footer */
+        }
+
+        .card {
+            /* Estilos iniciales del card */
+            transition: transform 0.3s ease; /* Agrega una transición suave de 0.3 segundos al efecto de transformación */
+        }
+
+            .card:hover {
+                transform: scale(1.05); /* Aplica una escala del 105% en el card cuando el puntero del mouse pasa sobre él */
+            }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                interval: 30000 // 30 segundos
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        @*Carousel*@
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicadores -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="~/css/img/Playa.jpg" alt="Playa" />
+                    <div class="carousel-caption">
+                        <p>Disfruta de nuestro hotel, ubicado en uno de los mejores destinos turísticos.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/css/img/Vistas.jpg" alt="Vistas">
+                    <div class="carousel-caption">
+                        <p>Maravíllate con las impresionantes vistas panorámicas desde nuestro hotel, donde podrás apreciar la belleza del entorno.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/css/img/Salas.jpg" alt="Salas">
+                    <div class="carousel-caption">
+                        <p>Relájate en nuestras lujosas residencias, diseñadas para ofrecerte una experiencia de confort y estilo sin igual.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/css/img/Relajación.jpg" alt="Spa">
+                    <div class="carousel-caption">
+                        <p>Déjate consentir en nuestro spa de clase mundial, donde encontrarás un oasis de relajación y bienestar para rejuvenecer tu cuerpo y mente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles -->
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+        @*Cards*@
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card rounded shadow d-flex h-100">
+                        <img class="card-img-top" src="~/css/img/TodoIncluido.jpeg" alt="Paquete Todo Inlcuido" />
+                        <div class="card-body">
+                            <h5 class="card-title">Paquete Todo incluido</h5>
+                            <p class="card-text">Coste: $450 por persona por noche</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card rounded shadow d-flex h-100">
+                        <img class="card-img-top" src="~/css/img/Alimentacion.jpeg" alt="Paquete Alimentacion" />
+                        <div class="card-body">
+                            <h5 class="card-title">Paquete Alimentación</h5>
+                            <p class="card-text">Coste: $275 por persona por noche</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card rounded shadow d-flex h-100">
+                        <img class="card-img-top" src="~/css/img/Hospedaje.jpg" alt="Paquete Hospedaje" />
+                        <div class="card-body">
+                            <h5 class="card-title">Paquete Hospedaje</h5>
+                            <p class="card-text">Coste: $210 por persona por noche</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-4">
+            @*Espacio para oferta*@
+            <div class="cta-section mb-4">
+                <h2>¡Reserva ahora y obtén un descuento especial!</h2>
+                <p>Disfruta de una estancia inolvidable en nuestro hotel de lujo.</p>
+                <a asp-controller="Reservacion" asp-action="ValidarCliente" class="btn btn-outline-dark">Reserva ahora</a>
+            </div>
+
+            <!-- Comodidades del hotel -->
+            <div class="features-section ">
+                <h3>Comodidades</h3>
+                <ul class="features-list">
+                    <li>
+                        <p>Piscina al aire libre con vista panorámica</p>
+                    </li>
+                    <li>
+                        <p>Spa de lujo con tratamientos revitalizantes</p>
+                    </li>
+                    <li>
+                        <p>Variados restaurantes con gastronomía internacional</p>
+                    </li>
+                    <li>
+                        <p>Amplio gimnasio con equipamiento moderno</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>

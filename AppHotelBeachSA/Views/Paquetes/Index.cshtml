@@ -1,0 +1,92 @@
+﻿@model IEnumerable<AppHotelBeachSA.Models.Paquete>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h1> Lista Paquetes</h1>
+</center>
+
+
+<div class="table-responsive">
+    <p>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+            <a class="btn btn-primary" asp-action="CrearPaquetes">Crear nuevo Paquete</a>
+            }
+
+</p>
+<table class="table">
+    <thead>
+    <thead>
+        <tr>
+            <th>
+                        @Html.DisplayNameFor(model => model.IdPaquete)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.NombrePaquete)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                    Precio en Colones
+            </th>
+
+            <th>
+                        @Html.DisplayNameFor(model => model.ProcentajePrima)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.NumMensualidades)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                            @Html.DisplayFor(modelItem => item.IdPaquete)
+                </td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.NombrePaquete)
+                </td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                 <td>
+                            @{
+                                double precioColones = item.Precio * AppHotelBeachSA.Controllers.PaquetesController.varTipoCambio.venta;
+                            }
+                            @precioColones.ToString("F")
+
+
+
+
+                </td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.ProcentajePrima)
+                </td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.NumMensualidades)
+                </td>
+                <td>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Editar", "Editar", new { id=item.IdPaquete},new {@class="btn btn-primary"})
+                                ;
+
+                                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.IdPaquete },new {@class="btn btn-primary mt-2"})
+                                ;
+                            }
+
+                </td>
+            </tr>
+                }
+    </tbody>
+</table>
+
+</div>

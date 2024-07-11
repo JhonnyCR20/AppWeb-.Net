@@ -1,0 +1,99 @@
+﻿@model AppHotelBeachSA.Models.Cliente
+@{
+    ViewData["Title"] = "CrearCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center><h1>Crear Cliente</h1> </center>
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @if (TempData["Mensaje"] != null)
+        {
+            <div class="alert alert-warning " role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                <strong>@TempData["Mensaje"]</strong>
+            </div>
+        }
+
+        <form asp-action="CrearCliente" class="Formularios">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="TipoCedula" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example" asp-for="TipoCedula">
+                    <option value="vacio">Selecciona un tipo de cedula</option>
+                    <option value="identidad">Cedula de identidad</option>
+                    <option value="extranjero">Numero Pasaporte</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cedula" class="control-label">Cedula o Numero de pasaporte</label>
+                <input asp-for="Cedula" id="Cedula" class="form-control" name="Cedula" />
+                <span asp-validation-for="Cedula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreCompleto" class="control-label"></label>
+                <input asp-for="NombreCompleto" name="NombreCompleto" id="NombreCompleto" class="form-control" />
+                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" id="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" id="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoElectronico" class="control-label"></label>
+                <input asp-for="CorreoElectronico" id="CorreoElectronico" class="form-control" />
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary ">Lista</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        document.getElementById("Cedula").addEventListener("blur", function () {
+            var cedula = document.getElementById("Cedula").value;
+            var tipoCedula = document.getElementById("TipoCedula").value;
+
+            if (tipoCedula === "identidad" && cedula.length === 9) {
+                var url = "https://apis.gometa.org/cedulas";
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url + "/" + cedula, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.results.length > 0) {
+                            var resultado = data.results[0];
+                            var nombreCompleto = resultado.fullname;
+
+                            document.getElementById("NombreCompleto").value = nombreCompleto;
+                        }
+                    }
+                };
+                xhr.send();
+            } else if (tipoCedula === "identidad" && cedula.length !== 9) {
+                alert("La cédula debe contener 9 dígitos.");
+            }
+        });
+    </script>
+}

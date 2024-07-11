@@ -1,0 +1,34 @@
+﻿
+@model AppHotelBeachSA.Models.Cliente;
+@{
+    ViewData["Title"] = "ValidarCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h1>Validar Cliente</h1>
+</center>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+        
+            <form id="FormularioCrearCuenta" asp-action="ValidarCliente" method="post" class="Formularios">
+                <div class="form-group">
+                    <label asp-for="Cedula" class="form-label">Digita tu numero de cedula o pasaporte</label>
+                    <input asp-for="Cedula" class="form-control" />
+                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <input type="submit" value="Aceptar" class="btn btn-primary" />
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+</div>

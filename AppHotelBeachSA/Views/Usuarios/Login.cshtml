@@ -1,0 +1,54 @@
+﻿@model AppHotelBeachSA.Models.Usuario
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center><h1>Login</h1></center>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            @if (TempData["Mensaje"] != null)
+            {
+                <div class="alert alert-warning" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    <strong>@TempData["Mensaje"]</strong>
+
+                </div>
+            }
+            <form asp-action="Login" id="FormularioLogin">
+                @*solicitamos el email*@
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @*solicitamos el password*@
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label">Password</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    ¿No tiene una cuenta?
+                    <a class="" asp-area="" asp-controller="Usuarios" asp-action="CrearUsuario">Crear Cuenta</a>
+
+                    <a class="" asp-area="" asp-controller="Usuarios" asp-action="EmailToken"> ¿Olvido su Contraseña?</a>
+                </div>
+                @*Boton que ejecuta el post del formulario*@
+                <div class="form-group mt-3">
+                    <input type="submit" value="Aceptar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4">
+        </div>
+
+
+    </div>
+
+
+</div>
+
+

@@ -1,0 +1,135 @@
+﻿@model AppHotelBeachSA.Models.Reservacion
+
+@{
+    ViewData["Title"] = "InformePrevio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Informe Previo</h1>
+
+<h4>Reservacion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InformePrevio">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="NombreCliente" class="control-label"></label>
+                <input asp-for="NombreCliente" class="form-control" rea/>
+                <span asp-validation-for="NombreCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoElectronico" class="control-label"></label>
+                <input asp-for="CorreoElectronico" class="form-control" readonly/>
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaReserva" class="control-label"></label>
+                <input asp-for="FechaReserva" class="form-control" readonly/>
+                <span asp-validation-for="FechaReserva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadPersonas" class="control-label"></label>
+                <input asp-for="CantidadPersonas" class="form-control" readonly />
+                <span asp-validation-for="CantidadPersonas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadNoches" class="control-label"></label>
+                <input asp-for="CantidadNoches" class="form-control" readonly />
+                <span asp-validation-for="CantidadNoches" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-1">
+                <label asp-for="FormaPago" class="control-label"></label>
+                <select name="formaPago" class="form-select" asp-for="FormaPago" onchange="mostrarCamposAdicionales()" disabled>
+                    <option value="vacio">Selecciona un metodo de pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Cheque">Cheque</option>
+                </select>
+
+            </div>
+           
+            <div class="from-group" id="camposCheque" style="display: none;">
+                <div class="form-group mt-2">
+                    <label class="form-label m-1" for="campoCheque">Nombre del Banco</label>
+                    <input asp-for="NombreBanco" class="form-control" id="campoCheque" name="chequeBanco" readonly />
+
+                </div>
+                <div class="form-group">
+                    <label class="form-label m-1" for="campoCheque2">Numero de cheque</label>
+                    <input asp-for="NumeroCheque" class="form-control" id="campoCheque" name="numeroCheque" readonly />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" readonly/>
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaqueteEscogido" class="control-label"></label>
+                <input asp-for="PaqueteEscogido" class="form-control" readonly />
+                <span asp-validation-for="PaqueteEscogido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subtotal" class="control-label"></label>
+                <input asp-for="Subtotal" class="form-control" readonly />
+                <span asp-validation-for="Subtotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descuento" class="control-label"></label>
+                <input asp-for="Descuento" class="form-control" readonly/>
+                <span asp-validation-for="Descuento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Impuesto" class="control-label"></label>
+                <input asp-for="Impuesto" class="form-control" readonly />
+                <span asp-validation-for="Impuesto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontoTotal" class="control-label"></label>
+                <input asp-for="MontoTotal" class="form-control"readonly />
+                <span asp-validation-for="MontoTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioColones" class="control-label"></label>
+                <input asp-for="PrecioColones" class="form-control" readonly />
+                <span asp-validation-for="PrecioColones" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prima" class="control-label"></label>
+                <input asp-for="Prima" class="form-control" readonly/>
+                <span asp-validation-for="Prima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PagoMensual" class="control-label"></label>
+                <input asp-for="PagoMensual" class="form-control" readonly/>
+                <span asp-validation-for="PagoMensual" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Confirmar" class="btn btn-primary" />
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info ">Volver al menu principal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    function mostrarCamposAdicionales() {
+        var opcionPago = document.getElementsByName("formaPago")[0].value;
+        var camposCheque = document.getElementById("camposCheque");
+        var cedula = document.getElementById("cedula");
+
+
+        if (opcionPago === "Cheque") {
+            camposCheque.style.display = "block";
+
+        } else {
+            camposCheque.style.display = "none";
+        }
+    }
+    document.addEventListener("DOMContentLoaded", mostrarCamposAdicionales); // Llama a la función cuando la página haya cargado
+</script>

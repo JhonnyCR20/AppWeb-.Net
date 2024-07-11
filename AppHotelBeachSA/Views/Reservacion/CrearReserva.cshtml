@@ -1,0 +1,136 @@
+﻿@model AppHotelBeachSA.Models.Reservacion
+
+@{
+    ViewData["Title"] = "CrearReserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h1>Crear Reservacion</h1>
+</center>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @if (TempData["Mensaje"] != null)
+        {
+            <div class="alert alert-warning " role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+                </button>
+
+                <strong>@TempData["Mensaje"]</strong>
+
+            </div>
+        }
+
+        <form asp-action="CrearReserva" class="Formularios" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="NombreCliente" class="control-label"></label>
+                <input asp-for="NombreCliente" class="form-control"  />
+                <span asp-validation-for="NombreCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoElectronico" class="control-label"></label>
+                <input asp-for="CorreoElectronico" class="form-control" />
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaReserva" class="control-label"></label>
+                <input asp-for="FechaReserva" class="form-control" />
+                <span asp-validation-for="FechaReserva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadPersonas" class="control-label"></label>
+                <input asp-for="CantidadPersonas" class="form-control" />
+                <span asp-validation-for="CantidadPersonas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadNoches" class="control-label"></label>
+                <input asp-for="CantidadNoches" class="form-control" />
+                <span asp-validation-for="CantidadNoches" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaqueteEscogido" class="control-label"></label>
+               
+                <select class="form-select" aria-label="Default select example"  asp-for="PaqueteEscogido">
+                    <option value="vacio">Selecciona un paquete</option>
+                    @foreach (var paquete in ViewBag.listaPaquetes)
+                    {
+                       <option value="@paquete.NombrePaquete">@paquete.NombrePaquete</option>
+                    }
+
+                </select>
+
+
+            </div>
+
+          
+
+
+            <div class="form-group mt-1">
+                <label asp-for="FormaPago" class="control-label"></label>
+                <select name="formaPago" class="form-select" onchange="mostrarCamposAdicionales()" asp-for="FormaPago">
+                    <option value="vacio">Selecciona un metodo de pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Cheque">Cheque</option>
+                </select>
+
+            </div>
+
+
+            <div class="from-group"id="camposCheque" style="display: none;">
+                <div class="form-group mt-2">
+                    <label class="form-label m-1" for="campoCheque">Nombre del Banco</label>
+                    <input asp-for="NombreBanco" class="form-control" id="campoCheque" name="chequeBanco" />
+                   
+                </div>
+                <div class="form-group">
+                    <label class="form-label m-1" for="campoCheque2">Numero de cheque</label>
+                    <input asp-for="NumeroCheque" class="form-control" id="campoCheque" name="numeroCheque" />
+                </div>
+
+            </div>
+
+          
+         
+
+
+        
+            <div class="form-group mt-2">
+                <input type="submit" value="Generar Informe" class="btn btn-primary mb-2" />
+               
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-info ">Volver al menu principal</a>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<script>
+    function mostrarCamposAdicionales() {
+        var opcionPago = document.getElementsByName("formaPago")[0].value;
+        var camposCheque = document.getElementById("camposCheque");
+        var cedula = document.getElementById("cedula");
+
+
+        if (opcionPago === "Cheque") {
+            camposCheque.style.display = "block";
+           
+        } else {
+            camposCheque.style.display = "none";
+        }
+    }
+</script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

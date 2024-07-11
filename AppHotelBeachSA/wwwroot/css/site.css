@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.Formularios {
+    margin: 0 auto;
+    width: auto;
+    padding: 1em;
+    border: 1px solid #dedede;
+    border-radius: 1em;
+    text-align: left;
+    color: #393939;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: 5px 5px 5px rgba(25,0,0,25);
+}
+
+#FormulariosLogin {
+    border: 1px solid #dedede;
+    border-radius: 1em;
+    box-shadow: 5px 5px 5px rgba(25,0,0,25);
+    padding: 1em;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}

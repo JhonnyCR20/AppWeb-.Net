@@ -1,0 +1,60 @@
+﻿@model AppHotelBeachSA.Models.Paquete
+
+@{
+    ViewData["Title"] = "CrearPaquetes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center><h1>Crear Paquete</h1> </center>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @if (TempData["MensajeError"] != null)
+        {
+            <div class="alert alert-warning " role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+                </button>
+
+                <strong>@TempData["MensajeError"]</strong>
+
+            </div>
+        }
+
+        <form asp-action="CrearPaquetes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombrePaquete" class="control-label"></label>
+                <input asp-for="NombrePaquete" class="form-control" />
+                <span asp-validation-for="NombrePaquete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcentajePrima" class="control-label"></label>
+                <input asp-for="ProcentajePrima" class="form-control" />
+                <span asp-validation-for="ProcentajePrima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumMensualidades" class="control-label"></label>
+                <input asp-for="NumMensualidades" class="form-control" />
+                <span asp-validation-for="NumMensualidades" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Index">Lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,41 @@
+﻿@model AppHotelBeachSA.Models.SeguridadToken;
+@{
+    ViewData["Title"] = "EmailToken";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            @*diseño del formulario para crear una cuenta*@
+            @if (TempData["MensajeCreado"] != null)
+            {
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    <strong>@TempData["MensajeCreado"]</strong>
+                </div>
+            }@*Cierre del if*@
+
+            <form id="FormularioCrearCuenta" asp-action="EmailToken" method="post" class="Formularios">
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="jorge@dominio.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label>*Se enviara un numero de Token al Correo*</label>
+                </div>
+
+                <div class="form-group mt-4">
+                    <input type="submit" value="Aceptar" class="btn btn-primary" />
+                    <a asp-action="Login" class="btn btn-primary m-2">Atras</a>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+</div>
